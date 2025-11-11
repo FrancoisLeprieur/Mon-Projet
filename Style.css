@@ -78,3 +78,65 @@ footer {
         border-radius: 10px;
     }
 }
+
+/* --- SOMMAIRE RÉDUIT --- */
+.sommaire-reduit {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 35px;
+    background-color: orange;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: wrap; /* pour que ça s'adapte sur petit écran */
+}
+
+/* Chaque élément du sommaire */
+.sommaire-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Images du sommaire */
+.sommaire-item img {
+    width: 110px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(78, 27, 27, 0.2);
+}
+
+.sommaire-item img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* Texte sous chaque image */
+.sommaire-item p {
+    margin-top: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+/* --- Responsif (mobile) --- */
+@media (max-width: 600px) {
+    .sommaire-reduit {
+        gap: 20px;
+    }
+
+    .sommaire-item img {
+        width: 85px;
+        height: 65px;
+    }
+
+    .sommaire-item p {
+        font-size: 0.9em;
+    }
+}
