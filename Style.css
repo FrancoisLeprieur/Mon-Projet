@@ -1,23 +1,85 @@
-/* Style général */
+/* ==================== VARIABLES ==================== */
+:root {
+    --couleur-principale: #c94545;
+    --couleur-accent: #F3AAAA;
+    --couleur-fond: #ffffff;
+    --couleur-texte: #333;
+    --ombre-legere: 0 4px 10px rgba(0, 0, 0, 0.2);
+    --ombre-moyenne: 0 8px 20px rgba(0, 0, 0, 0.15);
+    --ombre-forte: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== BASE ==================== */
 body {
-    background-color: orange;
+    background-color: var(--couleur-fond);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
     margin: 0;
-    padding: 30px 0;
+    padding: 0;
     font-family: Arial, sans-serif;
 }
 
-/* Titre principal */
 h1 {
-    color: white;
+    color: #000;
     font-size: 2.5em;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Conteneur principal */
+footer {
+    color: #000;
+    margin: 50px 0 30px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(80px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Classes d'animation réutilisables */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards;
+}
+
+.apparition {
+    text-align: center;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.zoom-hover {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.zoom-hover:hover {
+    transform: scale(1.05);
+    box-shadow: var(--ombre-forte);
+}
+
+/* Délais d'animation */
+.fade-delay-1 { animation-delay: 0.3s; }
+.fade-delay-2 { animation-delay: 0.6s; }
+.fade-delay-3 { animation-delay: 0.9s; }
+.fade-delay-4 { animation-delay: 1.2s; }
+
+/* ==================== SOMMAIRE PRINCIPAL ==================== */
 .sommaire {
     display: flex;
     flex-direction: column;
@@ -25,19 +87,23 @@ h1 {
     gap: 50px;
     width: 100%;
     max-width: 600px;
+    margin-top: 30px;
 }
 
-/* Chaque section */
 nav {
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+    /* Animation d'apparition */
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideIn 1.2s ease forwards;
 }
 
 nav:hover {
     transform: scale(1.03);
 }
 
-/* Images cliquables */
+/* Images cliquables du sommaire */
 nav img {
     width: 100%;
     max-width: 500px;
@@ -51,49 +117,29 @@ nav img {
 
 nav img:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--ombre-forte);
 }
 
-/* Texte sous les images */
 nav p {
     margin-top: 15px;
-    color: white;
+    color: #000;
     font-weight: bold;
     font-size: 1.2em;
 }
 
-/* Pied de page */
-footer {
-    color: white;
-    margin-top: 50px;
-    font-size: 0.9em;
-}
-
-@media (max-width: 600px) {
-    .sommaire {
-        gap: 30px;
-    }
-
-    nav img {
-        border-radius: 10px;
-    }
-}
-
-/* --- SOMMAIRE RÉDUIT --- */
+/* ==================== SOMMAIRE RÉDUIT (NAVIGATION) ==================== */
 .sommaire-reduit {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 35px;
-    background-color: orange;
+    background-color: var(--couleur-fond);
     padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    flex-wrap: wrap; /* pour que ça s'adapte sur petit écran */
+    width: 100%;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Chaque élément du sommaire */
 .sommaire-item {
     display: flex;
     flex-direction: column;
@@ -101,7 +147,6 @@ footer {
     text-align: center;
 }
 
-/* Images du sommaire */
 .sommaire-item img {
     width: 110px;
     height: 80px;
@@ -109,25 +154,246 @@ footer {
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(78, 27, 27, 0.2);
+    box-shadow: var(--ombre-legere);
 }
 
 .sommaire-item img:hover {
     transform: scale(1.08);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Texte sous chaque image */
 .sommaire-item p {
     margin-top: 8px;
-    color: white;
+    color: #000;
     font-weight: bold;
     font-size: 1.05em;
 }
 
-/* --- Responsif (mobile) --- */
+/* ==================== CONTENEUR PRINCIPAL ==================== */
+main {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding: 20px 0;
+}
+
+main h1 {
+    margin-top: 0;
+    padding-top: 10px;
+}
+
+/* ==================== CARTES JOUEURS ==================== */
+.joueur-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--ombre-moyenne);
+    transition: box-shadow 0.3s ease;
+    /* Animation d'apparition */
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideIn 1.2s ease forwards;
+}
+
+.joueur-card:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.joueur-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--couleur-accent);
+}
+
+.joueur-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--couleur-accent);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.joueur-photo:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.joueur-titre {
+    flex: 1;
+}
+
+.joueur-titre h2 {
+    color: var(--couleur-principale);
+    font-size: 2em;
+    margin: 0 0 10px 0;
+}
+
+.joueur-surnom {
+    color: #666;
+    font-style: italic;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+/* Informations du joueur */
+.joueur-info p {
+    margin: 10px 0;
+    color: var(--couleur-texte);
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.joueur-info strong {
+    color: var(--couleur-principale);
+}
+
+.joueur-info ul {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.joueur-info ul li {
+    margin: 8px 0;
+    color: #555;
+    font-size: 1.05em;
+}
+
+.description {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff9f9;
+    border-left: 4px solid var(--couleur-principale);
+    font-style: italic;
+    color: #444;
+}
+
+/* ==================== SECTIONS RÈGLES & HISTOIRE ==================== */
+.regle-section,
+.histoire-section {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: var(--ombre-moyenne);
+    padding: 25px;
+    margin: 40px 0;
+    /* Animation d'apparition */
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideIn 1.2s ease forwards;
+}
+
+.histoire-section {
+    margin: 50px 0;
+}
+
+.regle-section h2,
+.histoire-section h2 {
+    color: var(--couleur-principale);
+    border-bottom: 3px solid var(--couleur-accent);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.regle-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.regle-section p,
+.histoire-section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--couleur-texte);
+}
+
+/* Images dans les sections */
+.regle-image,
+.histoire-image {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.histoire-image {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.histoire-image:hover {
+    transform: scale(1.05);
+    box-shadow: var(--ombre-forte);
+}
+
+/* Icône balle */
+.balle {
+    width: 35px;
+    vertical-align: middle;
+}
+
+/* ==================== RESPONSIVE (MOBILE) ==================== */
 @media (max-width: 600px) {
+    .sommaire {
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    nav img {
+        border-radius: 10px;
+    }
+
     .sommaire-reduit {
+        gap: 20px;
+        padding: 10px 0;
+    }
+
+    .sommaire-item img {
+        width: 85px;
+        height: 65px;
+    }
+
+    .sommaire-item p {
+        font-size: 0.9em;
+    }
+
+    main {
+        margin-top: 20px;
+    }
+
+    .joueur-card {
+        padding: 20px;
+    }
+
+    .joueur-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .joueur-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .joueur-titre h2 {
+        font-size: 1.5em;
+    }
+
+    .joueur-surnom {
+        font-size: 1em;
+    }
+
+    .joueur-info p {
+        font-size: 1em;
+    }
+}
         gap: 20px;
     }
 
